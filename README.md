@@ -1,40 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Holaglow angular technical test
 
-## Getting Started
+The client wants a web application that can use to easily see the market general status, and also the value of a given cryptocurrency that updates every 10 seconds.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Url routing
+| 		                      			| URL                                                                |
+| ------------------------------------- | ------------------------------------------------------------------ |
+| Live data about specified currency  	| /live/BTC              										   	 |
+| Market overview    		  			| /overview               										     |
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Requirements
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Create a web app in angular latest stable version
+- Create a parent component, that lists the first 20 currencies, ordered by rank
+- The parent component must have two child components:
+	- One for retrieving the live data about all currencies
+	- Another one for retrieving the market overview
+- By clicking any currency of the 20 shown on the parent component, it should redirect to the url for showing the currency information
+- Use angular routing to show one component or another inside its parent, follow the Url routing above
+- Avoid to put unnecessary logic inside the component, and try to not duplicate code
+- Add Unit Tests that covers the functionality
+- We must consume the following apis for retrieving the value of a cryptocurrency:
 
-## Learn More
+### For retrieving the information of a currency:
+https://api.kucoin.com/api/v1/market/stats?symbol={code of the cryptocyrrency}-USDT example: https://api.kucoin.com/api/v1/market/stats?symbol=BTC-USDT
 
-To learn more about Next.js, take a look at the following resources:
+### For retrieving the list of cryptocurrencies: 
+https://api.coinpaprika.com/v1/coins
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### For retrieving the market overview:
+https://cryptingup.com/api/markets
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Tips
+Don't be shy, try to show us all your knowledge, coding philosophy and best practices that are necessary to complete the challenge. 
