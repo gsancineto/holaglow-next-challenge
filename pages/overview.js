@@ -11,6 +11,7 @@ export default function Overview() {
     const [overview, setOverview] = useState(false);
 
     const handleOverviewData = async () => {
+        //NOTA: el endpoint de la api que trae los datos del overview pareciera estar caido desde hace tiempo
         const result = await getOverview();
 
         if (result) setOverview(result);
