@@ -3,6 +3,6 @@ import Link from "next/link";
 
 export default function NavButton({url, label, color="default"}){
     return(
-        <Button color={color}><Link href={url}>{label}</Link></Button>
+        <Link href={url}><Button color={color}>{label}</Button></Link>
     )
 }

@@ -5,28 +5,14 @@ import { useEffect, useState } from 'react';
 import styles from '@/styles/Home.module.css'
 import NavButton from '../navButton';
 
-export default function Coin() {
-    const router = useRouter();
-    const { coin } = router.query;
-    const { getCoinInfo } = UseFetch();
-    const [coinDetails, setCoinDetails] = useState(false);
+export default function Coin({ data }) {
 
-    const handleCoinData = async () => {
-        const result = await getCoinInfo(coin);
-
-        if (result) setCoinDetails(result);
-        setTimeout(()=>{
-            setCoinDetails(false);
-        },10000)
-    }
-
-    useEffect(() => {
-        if (coin) handleCoinData();
-    }, [coin])
+    const coin = data.data;
+    console.log(coin)
 
     return (
         <div className={`${styles.main}`}>
-            <h3>{coin} details</h3>
+            <h3>{coin.symbol} details</h3>
             <Table>
                 <TableHeader>
                     <TableColumn>SYMBOL</TableColumn>
@@ -34,23 +20,31 @@ export default function Coin() {
                     <TableColumn>SELL PRICE</TableColumn>
                 </TableHeader>
                 {
-                    coinDetails ?
+                    coin ?
                         <TableBody>
-                            {coinDetails.map((coin) => (
-                                <TableRow key={coin.symbol}>
-                                    <TableCell>{coin.symbol}</TableCell>
-                                    <TableCell>{`$${coin.buy}`}</TableCell>
-                                    <TableCell>{`$${coin.sell}`}</TableCell>
-                                </TableRow>
-                            ))}
+                            <TableRow key={coin.symbol}>
+                                <TableCell>{coin.symbol}</TableCell>
+                                <TableCell>{`$${coin.buy}`}</TableCell>
+                                <TableCell>{`$${coin.sell}`}</TableCell>
+                            </TableRow>
                         </TableBody>
                         :
                         <TableBody emptyContent={"Sorry! There's no data for now. Please check again later."}>{[]}</TableBody>}
             </Table>
             <div className={styles.grid}>
-                <NavButton label={"Home"} url={"/"}/>
-                <NavButton label={"Back"} url={"/coins"} color={"primary"}/>
+                <NavButton label={"Home"} url={"/"} />
+                <NavButton label={"Back"} url={"/coins"} color={"primary"} />
             </div>
         </div>
     );
 };
+
+export async function getServerSideProps(context) {
+    const { getCoinInfo } = UseFetch();
+    const { coin } = context.params;
+    const data = await getCoinInfo(coin);
+
+    return {
+        props: { data },
+    };
+}
