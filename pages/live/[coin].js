@@ -1,14 +1,10 @@
 import UseFetch from '@/components/useFetch';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import styles from '@/styles/Home.module.css'
 import NavButton from '../navButton';
 
 export default function Coin({ data }) {
-
     const coin = data.data;
-    console.log(coin)
 
     return (
         <div className={`${styles.main}`}>
